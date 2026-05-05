@@ -2,9 +2,10 @@
 import math
 
 class MobilityManager:
-    def __init__(self, net, interval=1.0, speed=0.5, bounds=(10, 10)):
+    def __init__(self, net, interval=1.0, speed=0.5, bounds=(10, 10), fixed_nodes=None):
         self.net, self.interval, self.speed = net, interval, speed
         self.bx, self.by = bounds
+        self.fixed_nodes = set(fixed_nodes) if fixed_nodes else set()
         self.targets = {}                          # waypoint targets {nid: (tx,ty)}
 
     def start(self, model='waypoint'):
@@ -18,6 +19,8 @@ class MobilityManager:
         ds = self.speed * self.interval            # distance per step
         rng = self.net.rng                         # reuse network's seeded RNG
         for nid in self.net.nodes:
+            if nid in self.fixed_nodes:
+                continue
             x, y = self.net.pos[nid]
             if self.model == 'waypoint':
                 t = self.targets.get(nid)
