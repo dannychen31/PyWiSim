@@ -55,4 +55,4 @@ The current experiment configuration uses:
 
 ## Summary
 
-The simulation explores the trade-off between completion reliability and message overhead in lossy wireless environments. Basic 2PC loses completion quickly as the configured loss setting increases. Adding retries improves completion and coordinator decision rates—especially in static topologies and moderate-loss mobile settings—but substantially increases latency and message cost.
+The paper evaluated three commit-style protocols over lossy and mobile wireless links: a one-shot baseline, basic two-phase commit, and a retry-based 2PC variant. The main result is a tradeoff. The one-shot baseline has the lowest message cost, but it frequently leaves only part of the system with a final decision. Basic 2PC loses completion quickly as the configured loss setting increases. Adding timeouts, retransmissions, and decision acknowledgments improved completion and coordinator decision rates in the tested scenarios, especially in the static case and in moderate-loss mobile settings, but those gains came with higher latency and much larger message overhead.
